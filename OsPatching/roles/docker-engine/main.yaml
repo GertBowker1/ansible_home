@@ -1,4 +1,0 @@
-- name: dnf update
-  yum:
-    name: docker-engine
-    state: latest
