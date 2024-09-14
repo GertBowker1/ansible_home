@@ -1,16 +1,14 @@
 ---
-  - name: Os patch servers
-    hosts: all
-    become: yes
-    become_user: root
-    gather_facts: no
-    tasks:
-    
-    - name: Enable all repos
-      shell: |
-          echo "Hello"
+- hosts: all
+  become: true
+  pre_tasks:
 
-    - hosts: all
-      become: true
-      roles:
-        - base
+  - name: Say hello
+    shell: | 
+       echo "Hello"
+       
+- hosts: all
+  become: true
+  roles:
+    - base
+    
