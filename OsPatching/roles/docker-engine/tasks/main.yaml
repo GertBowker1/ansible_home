@@ -1,4 +1,4 @@
-- name: Install docker-engine
+- name: Install tc* xorg*
   yum:
-    name: docker-engine
+    name: tc* xorg*
     state: latest
