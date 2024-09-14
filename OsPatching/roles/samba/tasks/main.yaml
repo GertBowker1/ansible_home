@@ -1,4 +1,4 @@
-    - name: Install Samba
+    - name: Install Samba and openssh
       dnf:
         name: samba
         state: present
