@@ -1,17 +1,17 @@
 ---
-  - name: Os patch servers
-    hosts: all
-    become: yes
-    become_user: root
-    gather_facts: no
-    pre_task:
+- name: Os patch servers
+   hosts: all
+   become: yes
+   become_user: root
+   gather_facts: no
+   pre_task:
     
-    - name: Enable all repos
-      shell: |
-          echo "Hello"
+   - name: Enable all repos
+     shell: |
+         dnf config-manager --enable ol*
 
-    - hosts: all
-      become: true
-      roles:
-        - base
+- hosts: all
+  become: true
+  roles:
+    - base
     
