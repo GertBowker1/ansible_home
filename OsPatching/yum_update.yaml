@@ -1,4 +1,5 @@
 ---
+
 - hosts: all
   become: true
   pre_tasks:
@@ -11,4 +12,7 @@
   become: true
   roles:
     - base
-    
+    - ansible_user
+    - dnf
+    - samba
+    - reboot
