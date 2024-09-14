@@ -5,11 +5,7 @@
   become_user: root
   gather_facts: no
   pre_tasks:
-
-  - name: Say hello
-    shell: | 
-       echo "Hello"
-       
+  
 - hosts: all
   become: true
   roles:
