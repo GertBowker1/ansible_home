@@ -14,8 +14,8 @@
   become: true
   roles:
     - base
-    - ansible_user
-    - dnf
-    - samba
-    - docker-engine
-    - reboot
+#    - ansible_user
+#    - dnf
+#    - samba
+#    - docker-engine
+#    - reboot
