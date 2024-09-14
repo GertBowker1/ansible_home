@@ -1,0 +1,61 @@
+---
+  - name: Os patch servers
+    hosts: all
+    become: yes
+    become_user: root
+    gather_facts: no
+    tasks:
+
+    - name: add ansible user
+      user:
+        name: ansible
+        comment: Ansible_Automation
+        shell: /bin/bash
+        home:  /home/ansible
+        state: present
+        create_home: True
+
+    - name: Enable all repos
+      shell: |
+          dnf config-manager --enable ol*
+
+    - name: dnf update
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Install Samba
+      dnf:
+        name: samba
+        state: present
+    - name: install openssh
+      yum:
+        name: openssh
+        state: latest
+
+    - name: check to see if we need a reboot
+      command: dnf needs-restarting -r
+      register: result
+      ignore_errors: yes
+
+    - name: display reboot result
+      debug:
+        var: result.rc
+
+    - name: Reboot Server if necessary
+      command: shutdown -r now "Ansible Updates Triggered"
+      become: true
+      async: 30
+      poll: 0
+      when: result.rc == 1
+
+    - name: Pausing to allow server to shutdown and terminate our SSH connection
+      pause: seconds=30
+      when: result.rc == 1
+
+    - name: Wait for reboot to complete and SSH to become available
+      local_action: wait_for host={{ inventory_hostname }} port=22
+        state=started delay=30 timeout=600
+      retries: 30
+      delay: 10
+      when: result.rc == 1
