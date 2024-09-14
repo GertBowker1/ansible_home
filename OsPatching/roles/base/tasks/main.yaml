@@ -5,6 +5,14 @@
 - name: Say hello
   shell: | 
      echo "Hello"
+     
+- name: add sudoers file
+  copy:
+    src: files/ansible
+    dest: /etc/sudoers.d/ansible
+    owner: root
+    group: root
+    mode: 0440
 
 #- name: add authorized_key
 #  tags: always
