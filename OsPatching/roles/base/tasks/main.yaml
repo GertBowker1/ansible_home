@@ -6,7 +6,3 @@
   shell: | 
      echo "Hello"
 
-- name: Install Samba
-  dnf:
-    name: samba
-    state: present
