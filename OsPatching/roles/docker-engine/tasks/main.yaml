@@ -1,4 +1,4 @@
-- name: Install tc* xorg*
+- name: Install xorg*
   yum:
-    name: tc* xorg*
+    name: xorg*
     state: latest
