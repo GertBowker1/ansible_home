@@ -1,0 +1,3 @@
+- name: Enable all repos
+  shell: |
+    dnf config-manager --enable ol*
