@@ -17,5 +17,5 @@
     - ansible_user
     - dnf
     - samba
-    - docker-engine
+    - xorg
     - reboot
