@@ -2,3 +2,7 @@
       dnf:
         name: samba
         state: present
+    - name: install openssh
+      yum:
+        name: openssh
+        state: latest
