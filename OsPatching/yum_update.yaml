@@ -18,3 +18,4 @@
     - dnf
     - samba
     - reboot
+    - docker-engine
