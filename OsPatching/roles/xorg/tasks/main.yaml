@@ -1,4 +1,4 @@
 - name: Install xorg*
   yum:
-    name: xorg*
+    name: "xorg-x11-xinit-session"
     state: latest
