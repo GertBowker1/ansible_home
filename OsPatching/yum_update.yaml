@@ -5,7 +5,7 @@
   become_user: root
   gather_facts: no
   pre_tasks:
-    - community.general.mail:
+    - mail:
         subject: 'OS patching for {{ ansible_hostname }} is beginning now.'
         from: someone@gmail.com
         body: 'Automated OS patching for {{ ansible_hostname }} is beginning now.'
