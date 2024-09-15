@@ -14,7 +14,6 @@
         to: gertbowker@gmail.com
         charset: utf8
       delegate_to: localhost
-      tags: mail
   
 - hosts: all
   become: true
@@ -35,4 +34,3 @@
         to: gertbowker@gmail.com
         charset: utf8
       delegate_to: localhost
-      tags: mail 
