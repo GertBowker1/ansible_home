@@ -5,13 +5,13 @@
   become_user: root
   gather_facts: no
   pre_tasks:
-    - mail:
-        subject: 'OS patching for {{ ansible_hostname }} is beginning now.'
-        from: someone@gmail.com
-        body: 'Automated OS patching for {{ ansible_hostname }} is beginning now.'
-        to: gertbowker@gmail.com
-        charset: utf8
-      delegate_to: localhost
+    # - mail:
+    #     subject: 'OS patching for {{ ansible_hostname }} is beginning now.'
+    #     from: someone@gmail.com
+    #     body: 'Automated OS patching for {{ ansible_hostname }} is beginning now.'
+    #     to: gertbowker@gmail.com
+    #     charset: utf8
+    #   delegate_to: localhost
 
 
 - hosts: all
