@@ -5,16 +5,15 @@
   become_user: root
   gather_facts: no
   pre_tasks:
-
-  pre_tasks:
-    - mail:
+    - community.general.mail:
         subject: 'OS patching for {{ ansible_hostname }} is beginning now.'
         from: someone@gmail.com
         body: 'Automated OS patching for {{ ansible_hostname }} is beginning now.'
         to: gertbowker@gmail.com
         charset: utf8
       delegate_to: localhost
-  
+
+
 - hosts: all
   become: true
   roles:
@@ -26,11 +25,11 @@
     - reboot
 
 
-  post_tasks:
-    - mail:
-        subject: 'OS patching for {{ ansible_hostname }} has completed.'
-        from: someone@gmail.com
-        body: "Automated OS patching for {{ ansible_hostname }} has completed."
-        to: gertbowker@gmail.com
-        charset: utf8
-      delegate_to: localhost
+    # post_tasks:
+    # - mail:
+    #     subject: 'OS patching for {{ ansible_hostname }} has completed.'
+    #     from: someone@gmail.com
+    #     body: "Automated OS patching for {{ ansible_hostname }} has completed."
+    #     to: gertbowker@gmail.com
+    #     charset: utf8
+    #   delegate_to: localhost
