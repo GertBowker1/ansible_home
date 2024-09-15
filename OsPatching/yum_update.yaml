@@ -18,7 +18,7 @@
   become: true
   roles:
     - base
-#    - ansible_user
+    - ansible_user
     - dnf
     - samba
     - xorg
