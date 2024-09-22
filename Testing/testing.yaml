@@ -3,7 +3,7 @@
   become: yes
   become_user: root
   gather_facts: yes
-
+  tasks:
 - hosts: all
   become: true
   roles:
