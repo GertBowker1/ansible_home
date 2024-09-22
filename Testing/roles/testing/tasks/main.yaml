@@ -3,3 +3,7 @@
     copy:
       dest: /var/tmp/
       src: files/mytest.txt
+      mode: 0700
+      owner: root
+      group: root
+      validate: yes
