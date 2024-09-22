@@ -7,5 +7,5 @@
   tasks:
   - name: copy
     copy:
-      dest: /var/tmp/
+      dest: /var/tmp/mytest.txt
       src: files/mytest.txt
