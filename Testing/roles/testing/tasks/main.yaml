@@ -1,10 +1,4 @@
 ---
-- hosts: all
-  become: yes
-  become_user: root
-  gather_facts: no
-  pre_tasks:
-  tasks:
   - name: copy
     copy:
       dest: /var/tmp/mytest.txt
