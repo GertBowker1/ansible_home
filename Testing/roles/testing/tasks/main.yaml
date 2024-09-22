@@ -1,5 +1,5 @@
 ---
   - name: copy
     copy:
-      dest: /var/tmp/mytest.txt
+      dest: /var/tmp/
       src: files/mytest.txt
