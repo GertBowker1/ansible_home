@@ -2,7 +2,6 @@
 - hosts: all
   become: yes
   become_user: root
-  gather_facts: no
-  pre_tasks:
+  gather_facts: yes
   roles:
-    - testing
+    - Testing
