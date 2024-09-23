@@ -2,15 +2,6 @@
   shell: |
     dnf config-manager --enable ol*     
 
-- name: add ansible user
-  user:
-    name: ansible
-    comment: Ansible_Automation  
-    shell: /bin/bash
-    home:  /home/ansible 
-    state: present
-    create_home: True
-
 - name: add sudoers file
   copy:
     src: files/ansible
