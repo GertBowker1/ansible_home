@@ -1,19 +1,20 @@
 ---
   - name: Create VM snap
+    hosts: localhost
     collections:
       - community.vmware
     tasks:
-    - name: vmware something 
-      community.vmware.vmware_guest_snapshot:
-        state: present 
-        name: "{{ inventory_hostname }} "
-        snapshot_name: "{{ inventory_hostname }}.backup"
-        description: "Ansible Managed Snapshot"
-        memory_dump: false 
-        hostname: "192.168.0.137"
-        username: "root"
-        password: "r00tr00t"
-        validate_certs: false
-        port: 443
-        delegate_to: localhost
+      - name: vmware something 
+        community.vmware.vmware_guest_snapshot:
+          state: present 
+          name: "{{ inventory_hostname }} "
+          snapshot_name: "{{ inventory_hostname }}.backup"
+          description: "Ansible Managed Snapshot"
+          memory_dump: false 
+          hostname: "192.168.0.137"
+          username: "root"
+          password: "r00tr00t"
+          validate_certs: false
+          port: 443
+          delegate_to: localhost
 
