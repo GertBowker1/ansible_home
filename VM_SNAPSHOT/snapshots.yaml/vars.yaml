@@ -1,0 +1,4 @@
+vcenter_hostname: "192.168.0.137/"
+vcenter_username: "root"
+vcenter_password: "r00tr00t"
+vcenter_certs: false
