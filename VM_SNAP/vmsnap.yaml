@@ -1,5 +1,7 @@
 ---
   - name: Create VM snap
+    collections:
+      - community.vmware
     tasks:
     - name: vmware something 
       community.vmware.vmware_guest_snapshot:
