@@ -6,7 +6,8 @@
       
     tasks:
     - name: vmware something 
-      community.vmware.vmware_guest_snapshot:
+   #   community.vmware.vmware_guest_snapshot:
+      vmware_guest_snapshot:   
         state: present 
         name: "{{ inventory_hostname }} "
         snapshot_name: "{{ inventory_hostname }}.backup"
