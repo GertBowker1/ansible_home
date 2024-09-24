@@ -1,2 +1,9 @@
 collections:
-  - community.vmware
+  - name: oracle.oci
+  - name: community.general
+  - name: ansible.posix
+  - name: community.vmware
+
+
+#  collections:
+#  - community.vmware
