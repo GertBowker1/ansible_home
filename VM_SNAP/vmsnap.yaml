@@ -5,15 +5,15 @@
   become_user: root
   gather_facts: no
   tasks:
-    - name: vmware
-      vmware_guest_snapshot:
-        state: present 
-        name:  "{{ inventory_hostname }} "
-        snapshot_name: "{{ inventory_hostname }}.backup"
-        description: "Ansible Managed Snapshot"
-        memory_dump: False 
-        hostname: "192.168.0.137"
-        username: "root"
-        password: "r00tr00t"
-        validate_certs: false
-        port: 443
+  - name: vmware
+    vmware_guest_snapshot:
+      state: present 
+      name:  "{{ inventory_hostname }} "
+      snapshot_name: "{{ inventory_hostname }}.backup"
+      description: "Ansible Managed Snapshot"
+      memory_dump: False 
+      hostname: "192.168.0.137"
+      username: "root"
+      password: "r00tr00t"
+      validate_certs: false
+      port: 443
