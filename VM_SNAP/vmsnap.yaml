@@ -4,8 +4,6 @@
   become: yes
   become_user: root
   gather_facts: no
-  pre_tasks:
-    - include: vars.yaml
   tasks:
     - name: vmware
       vmware_guest_snapshot:
@@ -14,8 +12,8 @@
         snapshot_name: "{{ inventory_hostname }}.backup"
         description: "Ansible Managed Snapshot"
         memory_dump: False 
-        hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
-        validate_certs: "{{ vcenter_certs }}"
+        hostname: "192.168.0.137"
+        username: "root"
+        password: "r00tr00t"
+        validate_certs: false
         port: 443
