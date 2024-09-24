@@ -2,7 +2,7 @@
   - name: Create VM snap
     hosts: localhost
     collections:
-      - community.vmware
+      - name: community.vmware
       - name: community.general
       - name: ansible.posix
       - name: community.vmware
