@@ -1,16 +1,17 @@
 ---
-   hosts: all
-   gather_facts: no
-   tasks:
-   - name: vmware something 
-     vmware_guest_snapshot:
-       state: present 
-       name: "{{ inventory_hostname }} "
-       snapshot_name: "{{ inventory_hostname }}.backup"
-       description: "Ansible Managed Snapshot"
-       memory_dump: false 
-       hostname: "192.168.0.137"
-       username: "root"
-       password: "r00tr00t"
-       validate_certs: false
-       port: 443
+  - name: Create VM snap
+    hosts: all
+    gather_facts: no
+    tasks:
+    - name: vmware something 
+      vmware_guest_snapshot:
+        state: present 
+        name: "{{ inventory_hostname }} "
+        snapshot_name: "{{ inventory_hostname }}.backup"
+        description: "Ansible Managed Snapshot"
+        memory_dump: false 
+        hostname: "192.168.0.137"
+        username: "root"
+        password: "r00tr00t"
+        validate_certs: false
+        port: 443
