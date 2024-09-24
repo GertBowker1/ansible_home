@@ -4,7 +4,7 @@
   become_user: root
   gather_facts: no
   pre_tasks:
-    - include: vats.yaml
+    - include: vars.yaml
   tasks:
   - name: vmware
     vmware_guest_snapshot:
