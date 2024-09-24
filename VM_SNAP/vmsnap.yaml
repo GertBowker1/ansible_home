@@ -3,10 +3,7 @@
     hosts: localhost
     collections:
       - community.vmware
-      - community.general
-      - ansible.posix
-      - community.vmware
-  
+      
     tasks:
     - name: vmware something 
       vmware_guest_snapshot:
