@@ -5,4 +5,4 @@
       register: yum
 
     - name: Display Updates Applied
-    - debug: msg="{{ yum.stdout }}"
+    - debug: msg={{ yum.stdout }}
