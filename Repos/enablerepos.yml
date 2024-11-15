@@ -5,6 +5,9 @@
   become_user: root
   gather_facts: no
   tasks:
-  - name: Enable Repos 
+  - name: Enable ol8_appstream Repos 
     dnf:
-      enablerepo: '*'
+      enablerepo: ol8_appstream
+  - name: Enable ol8_baseos_latest Repos 
+    dnf:
+      enablerepo: ol8_baseos_latest
