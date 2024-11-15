@@ -2,8 +2,8 @@
       yum:
         name: '*'
         state: latest
-      register: yum.stdout
+      register: yum
 
     - name: Display the config
       debug:
-        msg: {{ yum.stdout }}
+        msg: "{{ yum.stdout }}"
