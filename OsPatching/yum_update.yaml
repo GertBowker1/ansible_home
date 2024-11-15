@@ -3,15 +3,15 @@
 - hosts: all
   become: yes
   become_user: root
-  gather_facts: no
+  gather_facts: True
   pre_tasks:
 
 - hosts: all
   become: true
   roles:
- #   - base
- #   - ansible_user
+    - base
+    - ansible_user
     - dnf
- #   - samba
- #   - xorg
+    - samba
+    - xorg
     - reboot
