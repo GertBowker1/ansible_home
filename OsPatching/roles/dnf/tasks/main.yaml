@@ -2,3 +2,8 @@
       yum:
         name: '*'
         state: latest
+      register: yum
+      
+    - name: display yum result
+      debug:
+        var: yum
