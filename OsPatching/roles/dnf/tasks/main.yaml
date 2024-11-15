@@ -7,3 +7,12 @@
     - name: display yum result
       debug:
         var: yum.rc
+
+    - name: dnf update2
+      command: uptime
+      register: uptime
+
+    - name: display uptime result
+      debug:
+        var: uptime.rc
+        
