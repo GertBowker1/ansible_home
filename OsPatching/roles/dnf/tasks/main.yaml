@@ -4,6 +4,5 @@
         state: latest
       register: yum
 
-    - name: Display the config
-      debug:
-        msg: "{{ yum.stdout }}"
+    - name: Display Updates Applied
+    - debug: msg="{{ yum.stdout }}"
