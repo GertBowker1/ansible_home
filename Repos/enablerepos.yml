@@ -5,6 +5,6 @@
   become_user: root
   gather_facts: no
   tasks:
-  - Enable Repos: 
+  - name: Enable Repos 
     dnf:
       enablerepo: '*'
