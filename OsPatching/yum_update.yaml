@@ -11,8 +11,8 @@
   roles:
 #    - base
 #    - ansible_user
+    - selinux
     - dnf
 #    - samba
 #    - xorg
     - reboot
-    - selinux
