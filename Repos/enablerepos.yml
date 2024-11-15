@@ -7,7 +7,7 @@
   tasks:
   - name: Enable ol8_appstream Repos 
     dnf:
-      enablerepo: ol8_appstream
-  - name: Enable ol8_baseos_latest Repos 
-    dnf:
-      enablerepo: ol8_baseos_latest
+      enablerepo: "{{ item }}"
+    loop:
+      - ol8_appstream
+      - ol8_baseos_latest
