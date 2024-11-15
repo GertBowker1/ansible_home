@@ -15,3 +15,4 @@
 #    - samba
 #    - xorg
     - reboot
+    - selinux
