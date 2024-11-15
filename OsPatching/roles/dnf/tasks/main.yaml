@@ -6,4 +6,4 @@
       
     - name: display yum result
       debug:
-        var: yum
+        var: yum.rc
