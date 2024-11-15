@@ -2,9 +2,3 @@
       yum:
         name: '*'
         state: latest
-      register: yum
-
-    - name: Display Updates Applied
-    - debug:
-      msg: {{ yum.stdout }}
-      verbosity: 1 
