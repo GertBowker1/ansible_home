@@ -22,11 +22,10 @@
         line: 'SELINUX=disabled'
         create: yes
         
-    - name: Disable and stop firewalld
-      ansible.builtin.systemd:
-        name: sssd
-        enabled: no
-        state: stopped
+    - name: Disable and stop SSSD
+      service:
+        name: sssd 
+        state: disabled
         
     - name: Clean Cache
       command: yum clean all
