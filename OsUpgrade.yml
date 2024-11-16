@@ -8,9 +8,11 @@
 
     - name: Disable all repos
       command: yum-config-manager --disable \* 
-      pause:
+
+    - name: Wait for 10 seconds
+      ansible.builtin.pause:
         seconds: 10
-   
+        
     - name: Enable ol8_baseos_latest
       command: yum-config-manager --enable ol8_baseos_latest
       
