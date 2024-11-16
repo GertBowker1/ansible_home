@@ -14,3 +14,6 @@
     loop:
       - ol8_appstream
       - ol8_baseos_latest
+      
+  - name: Enable all repos
+    command: dnf --enablerepo="*"
