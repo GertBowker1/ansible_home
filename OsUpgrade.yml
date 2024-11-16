@@ -21,6 +21,13 @@
     - name: CRemove Yum Cache
       command: rm -rf /var/cache/yum/
 
+    - name: Disable GPG check globally in /etc/yum.conf
+      lineinfile:
+        path: /etc/yum.conf
+        regexp: '^gpgcheck'
+        line: 'gpgcheck=0'
+        create: yes
+
     - name: Update all current packages to the latest version
       dnf:
         name: "*"
