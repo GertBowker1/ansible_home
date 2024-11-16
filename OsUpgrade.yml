@@ -39,7 +39,7 @@
     - name: Clean Cache
       command: yum clean all
 
-    - name: CRemove Yum Cache
+    - name: Remove Yum Cache
       command: rm -rf /var/cache/yum/
 
     - name: Disable GPG check globally in /etc/yum.conf
