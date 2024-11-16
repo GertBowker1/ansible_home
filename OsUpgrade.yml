@@ -21,8 +21,9 @@
     - name: Enable ol8_appstream
       command: yum-config-manager --enable ol8_appstream      
  
- #   - name: Enable leapp repo
- #     command: yum-config-manager --add-repo=http://yum.oracle.com/repo/OracleLinux/OL7/leapp/x86_64/
+    - name: Enable leapp repo
+      command: yum-config-manager --add-repo=http://yum.oracle.com/repo/OracleLinux/OL7/leapp/x86_64/
+      ignore_errors: true
 
     - name: Ensure SELinux is set to disabled
       lineinfile:
