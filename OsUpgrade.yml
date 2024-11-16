@@ -26,6 +26,7 @@
       service:
         name: sssd 
         state: stopped
+      ignore_errors: true
         
     - name: Clean Cache
       command: yum clean all
