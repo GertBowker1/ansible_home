@@ -9,8 +9,12 @@
     - name: Disable all repos
       command: yum-config-manager --disable \*
 
-    - name: Set correct OCI domain name
-      command: sed -i 's/\$ocidomain/oracle.com/g' /etc/yum.repos.d/*.repo
+    - name: Set correct domain
+      lineinfile:
+        path: /etc/yum.repos.d/*.repo
+        regexp: 'ocidomain'
+        line: 'oracle.com'
+        create: yes
       
     - name: Enable ol8_baseos_latest
       command: yum-config-manager --enable ol8_baseos_latest
