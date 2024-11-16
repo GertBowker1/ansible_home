@@ -48,6 +48,11 @@
         regexp: '^gpgcheck'
         line: 'gpgcheck=0'
         create: yes
+      register: result
+
+    - name: Display GP key result
+      debug:
+        var: result
 
     - name: Update all current packages to the latest version
       dnf:
