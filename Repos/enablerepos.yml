@@ -5,6 +5,9 @@
   become_user: root
   gather_facts: no
   tasks:
+  - name: Disable all repos
+    command: dnf --disablerepo="*"
+    
   - name: Enable ol8_appstream & baseos_latest Repos 
     dnf:
       enablerepo: "{{ item }}"
