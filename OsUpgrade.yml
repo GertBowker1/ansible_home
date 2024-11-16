@@ -7,7 +7,7 @@
   pre_tasks:
 
     - name: Disable all repos
-      command: yum-config-manager --disable \*
+      command: yum-config-manager --disable \* ; sleep 5
    
     - name: Enable ol8_baseos_latest
       command: yum-config-manager --enable ol8_baseos_latest
