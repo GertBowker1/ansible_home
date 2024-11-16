@@ -10,7 +10,7 @@
       command: yum-config-manager --disable \*
 
     - name: Enable all repos
-      command: dnf --enablerepo="*"
+      command: yum-config-manager --enable \*
 
     - name: Update all current packages to the latest version
       dnf:
