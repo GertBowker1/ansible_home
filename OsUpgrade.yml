@@ -15,6 +15,13 @@
  #   - name: Enable leapp repo
  #     command: yum-config-manager --add-repo=http://yum.oracle.com/repo/OracleLinux/OL7/leapp/x86_64/
 
+    - name: Ensure SELinux is set to disabled
+      lineinfile:
+        path: /etc/selinux/config
+        regexp: '^SELINUX='
+        line: 'SELINUX=disabled'
+        create: yes
+        
     - name: Clean Cache
       command: yum clean all
 
