@@ -1,8 +1,10 @@
 ---
 - name: Perform Leap Upgrade of Oracle Linux
-  hosts: all
-  become: true
-  tasks:
+- hosts: all
+  become: yes
+  become_user: root
+  gather_facts: True
+  pre_tasks:
 
     - name: Disable all repos
       command: dnf --disablerepo="*"
