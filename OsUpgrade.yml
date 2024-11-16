@@ -9,8 +9,11 @@
     - name: Disable all repos
       command: yum-config-manager --disable \*
 
-    - name: Enable all repos
-      command: yum-config-manager --enable \*
+    - name: Enable ol8_baseos_latest
+      command: yum-config-manager --enable ol8_baseos_latest
+      
+    - name: Enable ol8_appstream
+      command: yum-config-manager --enable ol8_appstream      
 
  #   - name: Enable leapp repo
  #     command: yum-config-manager --add-repo=http://yum.oracle.com/repo/OracleLinux/OL7/leapp/x86_64/
