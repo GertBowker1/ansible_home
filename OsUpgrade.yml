@@ -1,0 +1,54 @@
+---
+- name: Perform Leap Upgrade of Oracle Linux
+  hosts: all
+  become: yes
+  become_user: root
+  gather_facts: True
+  pre_tasks:
+
+    - name: Disable all repos
+      command: dnf --disablerepo="*"
+
+    - name: Enable all repos
+      command: dnf --enablerepo="*"
+
+    - name: Update all current packages to the latest version
+      dnf:
+        name: "*"
+        state: latest
+      when: ansible_distribution_major_version == "8"
+
+    - name: Install Oracle Linux 8 Leapp tool (for OL7 to OL8 upgrade)
+      yum:
+        name: leapp
+        state: present
+      when: ansible_distribution_major_version == "7"
+
+    - name: Run Leapp pre-upgrade check
+      command: leapp preupgrade
+      when: ansible_distribution_major_version == "7"
+
+    - name: Check for pre-upgrade results
+      command: leapp answer --yes
+      when: ansible_distribution_major_version == "7"
+      
+    - name: Start the upgrade (if everything is ready)
+      command: leapp upgrade
+      when: ansible_distribution_major_version == "7"
+
+    - name: Reboot the system for the upgrade to complete
+      reboot:
+        reboot_timeout: 600
+        test_command: whoami
+      when: ansible_distribution_major_version == "7"
+
+    - name: Clean up after the upgrade
+      command: leapp postupgrade
+      when: ansible_distribution_major_version == "7"
+
+    - name: Final cleanup and remove any unnecessary packages
+      dnf:
+        name: "*"
+        state: latest
+        autoremove: yes
+      when: ansible_distribution_major_version == "8"
