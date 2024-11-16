@@ -12,8 +12,8 @@
     - name: Enable all repos
       command: yum-config-manager --enable \*
 
-    - name: Enable leapp repo
-      command: yum-config-manager --add-repo=http://yum.oracle.com/repo/OracleLinux/OL7/leapp/x86_64/
+ #   - name: Enable leapp repo
+ #     command: yum-config-manager --add-repo=http://yum.oracle.com/repo/OracleLinux/OL7/leapp/x86_64/
 
     - name: Clean Cache
       command: yum clean all
