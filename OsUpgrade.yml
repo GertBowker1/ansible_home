@@ -30,11 +30,11 @@
         line: 'SELINUX=disabled'
         create: yes
         
-    - name: Disable and stop SSSD
-      service:
-        name: sssd 
-        state: stopped
-      ignore_errors: true
+ #   - name: Disable and stop SSSD
+ #     service:
+ #       name: sssd 
+ #       state: stopped
+ #     ignore_errors: true
         
     - name: Clean Cache
       command: yum clean all
