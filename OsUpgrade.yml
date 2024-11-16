@@ -7,7 +7,7 @@
   pre_tasks:
 
     - name: Disable all repos
-      command: dnf --disablerepo="*"
+      command: yum-config-manager --disable \*
 
     - name: Enable all repos
       command: dnf --enablerepo="*"
