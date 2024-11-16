@@ -8,13 +8,7 @@
 
     - name: Disable all repos
       command: yum-config-manager --disable \*
-
-    - name: Replace all content in the file with "newword"
-      ansible.builtin.replace:
-        path: /etc/yum.repos.d/*.repo
-        regexp: 'ocidomain'
-        replace: 'oracle.com'
-      
+   
     - name: Enable ol8_baseos_latest
       command: yum-config-manager --enable ol8_baseos_latest
       
