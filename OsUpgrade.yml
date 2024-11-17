@@ -103,6 +103,10 @@
       delay: 10
       when: result.rc == 1
 
+    - name: display reboot result
+      debug:
+        var: upgrade.rc
+
     - name: Run pre-upgrade
       command: leapp preupgrade
       register: upgrade
