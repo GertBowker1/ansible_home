@@ -23,26 +23,27 @@
     #   command: yum-config-manager --add-repo=http://yum.oracle.com/repo/OracleLinux/OL7/leapp/x86_64/
     #   ignore_errors: true
 
-    # - name: Ensure SELinux is set to disabled
-    #   lineinfile:
-    #     path: /etc/selinux/config
-    #     regexp: '^SELINUX='
-    #     line: 'SELINUX=disabled'
-    #     create: yes
+    - name: Ensure SELinux is set to disabled
+      lineinfile:
+        path: /etc/selinux/config
+        regexp: '^SELINUX='
+        line: 'SELINUX=disabled'
+        create: yes
         
  #   - name: Disable and stop SSSD
  #     service:
  #       name: sssd 
  #       state: stopped
  #     ignore_errors: true
-    - name: Enable Optional repo
+
+    - name: Enable Optional repo ol7_latest, ol7_optional_latest
       yum:
         enablerepo: ol7_latest,ol7_optional_latest
     
-    - name: Clean Cache
+    - name: Clean yum Cache
       command: yum clean all
 
-    - name: Remove Yum Cache
+    - name: Remove yum Cache
       command: rm -rf /var/cache/yum/
 
     - name: Install leapp
@@ -74,7 +75,7 @@
     - name: Wait for 10 seconds
       ansible.builtin.pause:
         seconds: 10
-        
+
     - name: check to see if we need a reboot
       command: needs-restarting -r
       register: result
