@@ -1,0 +1,13 @@
+---
+- name: Copy sudoers file to Server
+  hosts: all
+  become: true  
+  tasks:
+    - name: Copy the sudoers file
+      copy:
+        src: files/ansible 
+        dest: /etc/sudoers           
+        owner: root                 
+        group: root                
+        mode: '0440'                
+        validate: '/usr/sbin/visudo -c -f %s'  
