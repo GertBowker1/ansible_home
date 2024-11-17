@@ -13,7 +13,7 @@
         comment: "Ansible Automation"
 
     - name: add key
-      authorized_keys:
+      ansible.builtin.authorized_key:
         user: ansible
         key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDC1PR6edYLKZLWNGRP2HrWewVYMZGm+riJ1sklMQ1q5eAtgt+d1m+OYZC5XqoO8UwVBWefltBIyl1qud4+CwJK09kY4rVHWFy3wPXytXs65BwlhvqWRKLVk0PbB4Z2VypF4Hfiqpp5UcGMwGNOcWTTWK2EAcaCLupl9rTODxjkwoJz9X435I0BtQ/A3lzWe74f1UUOiXZfxsI8rORG2UmhkE/wyIPYD+2q+PeK1LZB2+E/UszSjimMw4Ur6xWGkctrPG9lvIUNP7cn33Jj4uOH8RTN+SyJrbJjD+D6vkEcOXYpKQ0a70HLeIdWO+nrMLVB4a3aTU81II8Ij/bOcAvDRxk323WLUsGPeoP9Pr2aQOFvz8qoq7T4YSzMNQQ6LLxg0B4/9A2vpv1RvQOmXL2CXqtxcX0X8sFRrI6hUpiILuBxMDP4P1kHv7iXqbpLnd+vaehzb03bBl9yvvOVszJnb1GAWV6i0PODhNITlaIbW26jVB6EWA/CJy7QAffRKD5z/zBi27v2zSqMJXaFwLQ4sslmWmccNYlGbhsnVqdqePwTVsPJt77hauWuv43HUETLI0njdyweU2B7zWXFk5hOU3TMeo0ti+aaCFcqYi2TOtVDQyHPQJpQHxGSSkjKbDJ8ugSsDdDN5x0Pz6f8JgZd/Is3EbkqSOugfaZAfGrzSw== ansible@dcpolauto01"
         manage_dir: True
