@@ -19,9 +19,12 @@
     # - name: Enable ol8_appstream
     #   command: yum-config-manager --enable ol8_appstream      
  
-    # - name: Enable leapp repo
-    #   command: yum-config-manager --add-repo=http://yum.oracle.com/repo/OracleLinux/OL7/leapp/x86_64/
-    #   ignore_errors: true
+    - name: Enable leapp repo
+      command: yum-config-manager --add-repo=http://yum.oracle.com/repo/OracleLinux/OL7/leapp/x86_64/
+      ignore_errors: true
+
+    - name: Enable all repos
+      command: yum-config-manager --enable \*
 
     - name: Ensure SELinux is set to disabled
       lineinfile:
@@ -30,12 +33,6 @@
         line: 'SELINUX=disabled'
         create: yes
         
- #   - name: Disable and stop SSSD
- #     service:
- #       name: sssd 
- #       state: stopped
- #     ignore_errors: true
-
     - name: Enable Optional repo ol7_latest, ol7_optional_latest
       yum:
         enablerepo: ol7_latest,ol7_optional_latest
@@ -107,6 +104,12 @@
       debug:
         var: upgrade.rc
 
+    - name: Install Oracle Linux 8 Leapp tool (for OL7 to OL8 upgrade)
+      yum:
+        name: leapp
+        state: present
+      when: ansible_distribution_major_version == "7"
+
     - name: Run pre-upgrade
       command: leapp preupgrade
       register: upgrade
@@ -114,7 +117,6 @@
     - name: display reboot result
       debug:
         var: upgrade.rc
-
 
     # - name: Install Oracle Linux 8 Leapp tool (for OL7 to OL8 upgrade)
     #   yum:
