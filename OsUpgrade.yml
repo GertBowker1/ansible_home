@@ -110,7 +110,7 @@
 
     - name: display leap result
       debug:
-        var: leap
+        var: leapp
 
     - name: Run pre-upgrade
       command: leapp preupgrade
