@@ -40,6 +40,10 @@
         line: 'gpgcheck=0'
         create: yes
       register: result
+
+    - name: Display GP key result
+      debug:
+        var: result
         
     - name: Enable Optional repo ol7_latest, ol7_optional_latest
       yum:
@@ -59,10 +63,6 @@
     - name: enable ol7 leapp repo
       command: yum-config-manager --enable ol7_leapp
 
-    - name: Display GP key result
-      debug:
-        var: result
-
     - name: Update all current packages to the latest version
       yum:
         name: "*"
@@ -78,10 +78,7 @@
       register: result
       ignore_errors: yes
 
-    - name: display reboot result
-      debug:
-        var: result.rc
-
+ 
     - name: Reboot Server if necessary
       command: shutdown -r now "Ansible Updates Triggered"
       become: true
@@ -112,11 +109,11 @@
 
     - name: Run pre-upgrade
       command: leapp preupgrade
-      register: upgrade.rc
+      register: upgrade
 
-    - name: display reboot result
+    - name: display upgrade result
       debug:
-        var: upgrade.rc
+        var: upgrade
 
     # - name: Install Oracle Linux 8 Leapp tool (for OL7 to OL8 upgrade)
     #   yum:
