@@ -6,8 +6,8 @@
   gather_facts: True
   pre_tasks:
 
-    - name: Enable all repos
-      command: yum-config-manager --enable \* 
+ #   - name: Enable all repos
+ #     command: yum-config-manager --enable \* 
 
     # - name: Wait for 10 seconds
     #   ansible.builtin.pause:
