@@ -112,7 +112,7 @@
 
     - name: Run pre-upgrade
       command: leapp preupgrade
-      register: upgrade
+      register: upgrade.rc
 
     - name: display reboot result
       debug:
