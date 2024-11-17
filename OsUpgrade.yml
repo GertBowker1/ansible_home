@@ -32,6 +32,14 @@
         regexp: '^SELINUX='
         line: 'SELINUX=disabled'
         create: yes
+
+    - name: Disable GPG check globally in /etc/yum.conf
+      lineinfile:
+        path: /etc/yum.conf
+        regexp: '^gpgcheck'
+        line: 'gpgcheck=0'
+        create: yes
+      register: result
         
     - name: Enable Optional repo ol7_latest, ol7_optional_latest
       yum:
@@ -50,14 +58,6 @@
 
     - name: enable ol7 leapp repo
       command: yum-config-manager --enable ol7_leapp
-
-    - name: Disable GPG check globally in /etc/yum.conf
-      lineinfile:
-        path: /etc/yum.conf
-        regexp: '^gpgcheck'
-        line: 'gpgcheck=0'
-        create: yes
-      register: result
 
     - name: Display GP key result
       debug:
