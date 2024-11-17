@@ -6,8 +6,8 @@
   gather_facts: True
   pre_tasks:
 
-    # - name: Disable all repos
-    #   command: yum-config-manager --disable \* 
+    - name: Enable all repos
+      command: yum-config-manager --enable \* 
 
     # - name: Wait for 10 seconds
     #   ansible.builtin.pause:
@@ -110,7 +110,7 @@
 
     - name: display leap result
       debug:
-        var: leapp
+        var: leap
 
     - name: Run pre-upgrade
       command: leapp preupgrade
