@@ -6,41 +6,52 @@
   gather_facts: True
   pre_tasks:
 
-    - name: Disable all repos
-      command: yum-config-manager --disable \* 
+    # - name: Disable all repos
+    #   command: yum-config-manager --disable \* 
 
-    - name: Wait for 10 seconds
-      ansible.builtin.pause:
-        seconds: 10
+    # - name: Wait for 10 seconds
+    #   ansible.builtin.pause:
+    #     seconds: 10
         
-    - name: Enable ol8_baseos_latest
-      command: yum-config-manager --enable ol8_baseos_latest
+    # - name: Enable ol8_baseos_latest
+    #   command: yum-config-manager --enable ol8_baseos_latest
       
-    - name: Enable ol8_appstream
-      command: yum-config-manager --enable ol8_appstream      
+    # - name: Enable ol8_appstream
+    #   command: yum-config-manager --enable ol8_appstream      
  
-    - name: Enable leapp repo
-      command: yum-config-manager --add-repo=http://yum.oracle.com/repo/OracleLinux/OL7/leapp/x86_64/
-      ignore_errors: true
+    # - name: Enable leapp repo
+    #   command: yum-config-manager --add-repo=http://yum.oracle.com/repo/OracleLinux/OL7/leapp/x86_64/
+    #   ignore_errors: true
 
-    - name: Ensure SELinux is set to disabled
-      lineinfile:
-        path: /etc/selinux/config
-        regexp: '^SELINUX='
-        line: 'SELINUX=disabled'
-        create: yes
+    # - name: Ensure SELinux is set to disabled
+    #   lineinfile:
+    #     path: /etc/selinux/config
+    #     regexp: '^SELINUX='
+    #     line: 'SELINUX=disabled'
+    #     create: yes
         
  #   - name: Disable and stop SSSD
  #     service:
  #       name: sssd 
  #       state: stopped
  #     ignore_errors: true
-        
+    - name: Enable Optional repo
+      yum:
+        enablerepo: ol7_latest,ol7_optional_latest
+    
     - name: Clean Cache
       command: yum clean all
 
     - name: Remove Yum Cache
       command: rm -rf /var/cache/yum/
+
+    - name: Install leapp
+      yum:
+        name: oraclelinux-developer-release-el7
+        state: latest
+
+    - name: enable ol7 leapp repo
+      command: yum-config-manager --enable ol7_leapp
 
     - name: Disable GPG check globally in /etc/yum.conf
       lineinfile:
@@ -55,42 +66,82 @@
         var: result
 
     - name: Update all current packages to the latest version
-      dnf:
-        name: "*"
-        state: latest
-      when: ansible_distribution_major_version == "7"
-
-    - name: Install Oracle Linux 8 Leapp tool (for OL7 to OL8 upgrade)
       yum:
-        name: leapp
-        state: present
-      when: ansible_distribution_major_version == "7"
-
-    - name: Run Leapp pre-upgrade check
-      command: leapp preupgrade
-      when: ansible_distribution_major_version == "7"
-
-    - name: Check for pre-upgrade results
-      command: leapp answer --yes
-      when: ansible_distribution_major_version == "7"
-      
-    - name: Start the upgrade (if everything is ready)
-      command: leapp upgrade
-      when: ansible_distribution_major_version == "7"
-
-    - name: Reboot the system for the upgrade to complete
-      reboot:
-        reboot_timeout: 600
-        test_command: whoami
-      when: ansible_distribution_major_version == "7"
-
-    - name: Clean up after the upgrade
-      command: leapp postupgrade
-      when: ansible_distribution_major_version == "7"
-
-    - name: Final cleanup and remove any unnecessary packages
-      dnf:
         name: "*"
         state: latest
-        autoremove: yes
-      when: ansible_distribution_major_version == "8"
+      when: ansible_distribution_major_version == "7"
+
+    - name: Wait for 10 seconds
+      ansible.builtin.pause:
+        seconds: 10
+        
+    - name: check to see if we need a reboot
+      command: needs-restarting -r
+      register: result
+      ignore_errors: yes
+
+    - name: display reboot result
+      debug:
+        var: result.rc
+
+    - name: Reboot Server if necessary
+      command: shutdown -r now "Ansible Updates Triggered"
+      become: true
+      async: 30
+      poll: 0
+      when: result.rc == 1
+
+    - name: Pausing to allow server to shutdown and terminate our SSH connection
+      pause: seconds=30
+      when: result.rc == 1
+
+    - name: Wait for reboot to complete and SSH to become available
+      local_action: wait_for host={{ inventory_hostname }} port=22
+        state=started delay=30 timeout=600
+      retries: 30
+      delay: 10
+      when: result.rc == 1
+
+    - name: Run pre-upgrade
+      command: leapp preupgrade
+      register: upgrade
+
+    - name: display reboot result
+      debug:
+        var: upgrade.rc
+
+
+    # - name: Install Oracle Linux 8 Leapp tool (for OL7 to OL8 upgrade)
+    #   yum:
+    #     name: leapp
+    #     state: present
+    #   when: ansible_distribution_major_version == "7"
+
+    # - name: Run Leapp pre-upgrade check
+    #   command: leapp preupgrade
+    #   when: ansible_distribution_major_version == "7"
+
+    # - name: Check for pre-upgrade results
+    #   command: leapp answer --yes
+    #   when: ansible_distribution_major_version == "7"
+      
+    # - name: Start the upgrade (if everything is ready)
+    #   command: leapp upgrade
+    #   when: ansible_distribution_major_version == "7"
+
+    # - name: Reboot the system for the upgrade to complete
+    #   reboot:
+    #     reboot_timeout: 600
+    #     test_command: whoami
+    #   when: ansible_distribution_major_version == "7"
+
+    # - name: Clean up after the upgrade
+    #   command: leapp postupgrade
+    #   when: ansible_distribution_major_version == "7"
+
+    # - name: Final cleanup and remove any unnecessary packages
+    #   dnf:
+    #     name: "*"
+    #     state: latest
+    #     autoremove: yes
+    #   when: ansible_distribution_major_version == "8"
