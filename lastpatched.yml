@@ -46,6 +46,6 @@
     - name: Append last patch info to output file on control machine
       local_action:
         module: lineinfile
-        path: "/tmp/oracle_last_patched_report.txt"
+        path: "/tmp/oracle.txt"
         line: "{{ last_patch_info }}"
         create: yes
