@@ -1,0 +1,44 @@
+---
+- name: Report on Oracle Linux server's last patched date
+  hosts: all
+  become: true  # Become root to access logs
+  gather_facts: true
+  tasks:
+
+    - name: Check if the server uses yum (for OL7 and older)
+      when: ansible_facts['distribution_major_version'] in ['7']
+      stat:
+        path: /var/log/yum.log
+      register: yum_log_status
+
+    - name: Check if the server uses dnf (for OL8 and newer)
+      when: ansible_facts['distribution_major_version'] in ['8']
+      stat:
+        path: /var/log/dnf.log
+      register: dnf_log_status
+
+    - name: Get the last patch date from yum logs (for OL7 and older)
+      when: yum_log_status.stat.exists
+      shell: |
+        grep "Updated" /var/log/yum.log* | tail -n 1 | awk '{print $1, $2, $3}'
+      register: last_patch_yum
+      changed_when: false
+      failed_when: false
+
+    - name: Get the last patch date from dnf logs (for OL8 and newer)
+      when: dnf_log_status.stat.exists
+      shell: |
+        grep "Updated" /var/log/dnf.log* | tail -n 1 | awk '{print $1, $2, $3}'
+      register: last_patch_dnf
+      changed_when: false
+      failed_when: false
+
+    - name: Report last patch date for OL7 and older (yum)
+      when: yum_log_status.stat.exists
+      debug:
+        msg: "Last patch applied (via yum log) on {{ inventory_hostname }}: {{ last_patch_yum.stdout }}"
+
+    - name: Report last patch date for OL8 and newer (dnf)
+      when: dnf_log_status.stat.exists
+      debug:
+        msg: "Last patch applied (via dnf log) on {{ inventory_hostname }}: {{ last_patch_dnf.stdout }}"
