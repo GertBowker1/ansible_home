@@ -50,6 +50,16 @@
     - name: Append last patch info to output file on control machine
       local_action:
         module: lineinfile
-        path: "/home/ansible/oracle_last_patched_report.txt"  # Absolute path
+        path: "/home/your_user/oracle_last_patched_report.txt"  # Absolute path
         line: "{{ last_patch_info }}"
         create: yes
+
+    - name: Verify the file is created
+      local_action:
+        module: stat
+        path: "/home/your_user/oracle_last_patched_report.txt"
+      register: file_stat
+
+    - name: Debug file stats
+      debug:
+        msg: "File status: {{ file_stat }}"
