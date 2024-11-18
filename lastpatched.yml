@@ -1,6 +1,6 @@
 ---
 - name: Report on Oracle Linux server's last patched date and create output file
-  hosts: oracle_servers
+  hosts: all
   become: true  # Become root to access logs
   gather_facts: true
   tasks:
