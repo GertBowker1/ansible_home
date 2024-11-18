@@ -20,7 +20,7 @@
     - name: Get the last patch date from yum logs (for OL7 and older)
       when: yum_log_status.stat.exists | default(false)
       shell: |
-        grep "Updated" /var/log/yum.log* | tail -n 1 | awk '{print $1, $2, $3}'
+        grep "Upgraded" /var/log/yum.log* | tail -n 1 | awk '{print $1, $2, $3}'
       register: last_patch_yum
       changed_when: false
       failed_when: false
@@ -28,7 +28,7 @@
     - name: Get the last patch date from dnf logs (for OL8 and newer)
       when: dnf_log_status.stat.exists | default(false)
       shell: |
-        grep "Updated" /var/log/dnf.log* | tail -n 1 | awk '{print $1, $2, $3}'
+        grep "Upgraded" /var/log/dnf.log* | tail -n 1 | awk '{print $1, $2, $3}'
       register: last_patch_dnf
       changed_when: false
       failed_when: false
