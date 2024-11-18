@@ -47,19 +47,21 @@
       debug:
         msg: "Last patch info: {{ last_patch_info }}"
 
-    - name: Append last patch info to a local file on Ansible control machine
+    - name: Append last patch info to a file on the Ansible control machine
+      delegate_to: localhost
       ansible.builtin.lineinfile:
         path: "/home/{{ ansible_user }}/oracle_last_patched_report.txt"
         line: "{{ last_patch_info }}"
         create: yes
         mode: '0644'
-      delegate_to: localhost
 
-    - name: Verify the file is updated
+    - name: Verify the file is updated on the control machine
+      delegate_to: localhost
       stat:
         path: "/home/{{ ansible_user }}/oracle_last_patched_report.txt"
       register: file_stat
 
     - name: Debug file status
+      delegate_to: localhost
       debug:
         msg: "File status: {{ file_stat }}"
