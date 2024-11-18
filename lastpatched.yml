@@ -47,19 +47,19 @@
       debug:
         msg: "{{ last_patch_info }}"
 
-    - name: Append last patch info to output file on control machine
-      local_action:
-        module: lineinfile
-        path: "/home/your_user/oracle_last_patched_report.txt"  # Absolute path
-        line: "{{ last_patch_info }}"
-        create: yes
+    - name: Write last patch info to output file (using copy)
+      copy:
+        content: "{{ last_patch_info }}"
+        dest: "/home/ansible/oracle_last_patched_report.txt"
+        mode: '0644'
+        owner: yansible
+        group: root
 
     - name: Verify the file is created
-      local_action:
-        module: stat
-        path: "/home/ansible/oracle_last_patched_report.txt"
+      stat:
+        path: "/home/your_user/oracle_last_patched_report.txt"
       register: file_stat
 
-    - name: Debug file stats
+    - name: Debug file status
       debug:
         msg: "File status: {{ file_stat }}"
