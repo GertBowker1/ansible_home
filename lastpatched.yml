@@ -48,7 +48,7 @@
         msg: "Last patch info: {{ last_patch_info }}"
 
     - name: Append last patch info to a local file on Ansible control machine
-      local_action: lineinfile
+      ansible.builtin.lineinfile:
         path: "/home/{{ ansible_user }}/oracle_last_patched_report.txt"
         line: "{{ last_patch_info }}"
         create: yes
