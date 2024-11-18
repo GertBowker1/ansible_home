@@ -1,5 +1,5 @@
 ---
-- name: Report on Oracle Linux servers' last patched dates and create concatenated output file
+- name: Report on Oracle Linux server's last patched date and create output file
   hosts: all
   become: true  # Become root to access logs
   gather_facts: true
@@ -47,21 +47,19 @@
       debug:
         msg: "Last patch info: {{ last_patch_info }}"
 
-    - name: Append last patch info to a file on the Ansible control machine
-      delegate_to: localhost
-      ansible.builtin.lineinfile:
-        path: "/home/{{ ansible_user }}/oracle_last_patched_report.txt"
-        line: "{{ last_patch_info }}"
-        create: yes
+    - name: Write last patch info to output file (using copy)
+      copy:
+        content: "{{ last_patch_info }}"
+        dest: "/home/{{ ansible_user }}/oracle_last_patched_report.txt"
         mode: '0644'
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
 
-    - name: Verify the file is updated on the control machine
-      delegate_to: localhost
+    - name: Verify the file is created
       stat:
         path: "/home/{{ ansible_user }}/oracle_last_patched_report.txt"
       register: file_stat
 
     - name: Debug file status
-      delegate_to: localhost
       debug:
         msg: "File status: {{ file_stat }}"
