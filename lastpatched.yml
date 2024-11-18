@@ -43,10 +43,9 @@
       set_fact:
         last_patch_info: "{{ inventory_hostname }} - Last patch (via dnf log): {{ last_patch_dnf.stdout }}"
 
-    - name: Create readable output file on control machine
+    - name: Append last patch info to output file on control machine
       local_action:
-        module: copy
-        content: "{{ last_patch_info }}"
-        dest: "./oracle_last_patched_report.txt"
-        append: yes
-
+        module: lineinfile
+        path: "./oracle_last_patched_report.txt"
+        line: "{{ last_patch_info }}"
+        create: yes
