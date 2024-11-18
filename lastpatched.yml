@@ -57,7 +57,7 @@
     - name: Verify the file is created
       local_action:
         module: stat
-        path: "/home/your_user/oracle_last_patched_report.txt"
+        path: "/home/ansible/oracle_last_patched_report.txt"
       register: file_stat
 
     - name: Debug file stats
