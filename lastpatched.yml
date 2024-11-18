@@ -1,6 +1,6 @@
 ---
-- name: Report on Oracle Linux server's last patched date
-  hosts: all
+- name: Report on Oracle Linux server's last patched date and create output file
+  hosts: oracle_servers
   become: true  # Become root to access logs
   gather_facts: true
   tasks:
@@ -33,12 +33,20 @@
       changed_when: false
       failed_when: false
 
-    - name: Report last patch date for OL7 and older (yum)
+    - name: Set the last patch info for OL7 and older (yum)
       when: yum_log_status.stat.exists | default(false)
-      debug:
-        msg: "Last patch applied (via yum log) on {{ inventory_hostname }}: {{ last_patch_yum.stdout }}"
+      set_fact:
+        last_patch_info: "{{ inventory_hostname }} - Last patch (via yum log): {{ last_patch_yum.stdout }}"
 
-    - name: Report last patch date for OL8 and newer (dnf)
+    - name: Set the last patch info for OL8 and newer (dnf)
       when: dnf_log_status.stat.exists | default(false)
-      debug:
-        msg: "Last patch applied (via dnf log) on {{ inventory_hostname }}: {{ last_patch_dnf.stdout }}"
+      set_fact:
+        last_patch_info: "{{ inventory_hostname }} - Last patch (via dnf log): {{ last_patch_dnf.stdout }}"
+
+    - name: Create readable output file on control machine
+      local_action:
+        module: copy
+        content: "{{ last_patch_info }}"
+        dest: "./oracle_last_patched_report.txt"
+        append: yes
+
