@@ -43,9 +43,9 @@
       set_fact:
         last_patch_info: "{{ inventory_hostname }} - Last patch (via dnf log): {{ last_patch_dnf.stdout }}"
 
-    - name: Debug last patch info
+    - name: Debug the last patch info
       debug:
-        msg: "{{ last_patch_info }}"
+        msg: "Last patch info: {{ last_patch_info }}"
 
     - name: Write last patch info to output file (using copy)
       copy:
