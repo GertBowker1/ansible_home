@@ -50,14 +50,14 @@
     - name: Write last patch info to output file (using copy)
       copy:
         content: "{{ last_patch_info }}"
-        dest: "/home/ansible/oracle_last_patched_report.txt"
+        dest: "/home/{{ ansible_user }}/oracle_last_patched_report.txt"
         mode: '0644'
-        owner: yansible
-        group: root
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
 
     - name: Verify the file is created
       stat:
-        path: "/home/your_user/oracle_last_patched_report.txt"
+        path: "/home/{{ ansible_user }}/oracle_last_patched_report.txt"
       register: file_stat
 
     - name: Debug file status
