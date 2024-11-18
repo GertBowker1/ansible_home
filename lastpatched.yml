@@ -18,7 +18,7 @@
       register: dnf_log_status
 
     - name: Get the last patch date from yum logs (for OL7 and older)
-      when: yum_log_status.stat.exists
+      when: yum_log_status.stat.exists | default(false)
       shell: |
         grep "Updated" /var/log/yum.log* | tail -n 1 | awk '{print $1, $2, $3}'
       register: last_patch_yum
@@ -26,7 +26,7 @@
       failed_when: false
 
     - name: Get the last patch date from dnf logs (for OL8 and newer)
-      when: dnf_log_status.stat.exists
+      when: dnf_log_status.stat.exists | default(false)
       shell: |
         grep "Updated" /var/log/dnf.log* | tail -n 1 | awk '{print $1, $2, $3}'
       register: last_patch_dnf
@@ -34,11 +34,11 @@
       failed_when: false
 
     - name: Report last patch date for OL7 and older (yum)
-      when: yum_log_status.stat.exists
+      when: yum_log_status.stat.exists | default(false)
       debug:
         msg: "Last patch applied (via yum log) on {{ inventory_hostname }}: {{ last_patch_yum.stdout }}"
 
     - name: Report last patch date for OL8 and newer (dnf)
-      when: dnf_log_status.stat.exists
+      when: dnf_log_status.stat.exists | default(false)
       debug:
         msg: "Last patch applied (via dnf log) on {{ inventory_hostname }}: {{ last_patch_dnf.stdout }}"
