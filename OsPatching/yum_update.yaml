@@ -9,10 +9,10 @@
 - hosts: all
   become: true
   roles:
-#    - base
-#    - ansible_user
+    - base
+    - ansible_user
     - selinux
     - dnf
-#    - samba
-#    - xorg
+    - samba
+    - xorg
     - reboot
