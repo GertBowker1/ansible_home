@@ -15,7 +15,7 @@
     - name: add users key
       authorized_key:
         user: ansible
-        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDC1PR6edYLKZLWNGRP2HrWewVYMZGm+riJ1sklMQ1q5eAtgt+d1m+OYZC5XqoO8UwVBWefltBIyl1qud4+CwJK09kY4rVHWFy3wPXytXs65BwlhvqWRKLVk0PbB4Z2VypF4Hfiqpp5UcGMwGNOcWTTWK2EAcaCLupl9rTODxjkwoJz9X435I0BtQ/A3lzWe74f1UUOiXZfxsI8rORG2UmhkE/wyIPYD+2q+PeK1LZB2+E/UszSjimMw4Ur6xWGkctrPG9lvIUNP7cn33Jj4uOH8RTN+SyJrbJjD+D6vkEcOXYpKQ0a70HLeIdWO+nrMLVB4a3aTU81II8Ij/bOcAvDRxk323WLUsGPeoP9Pr2aQOFvz8qoq7T4YSzMNQQ6LLxg0B4/9A2vpv1RvQOmXL2CXqtxcX0X8sFRrI6hUpiILuBxMDP4P1kHv7iXqbpLnd+vaehzb03bBl9yvvOVszJnb1GAWV6i0PODhNITlaIbW26jVB6EWA/CJy7QAffRKD5z/zBi27v2zSqMJXaFwLQ4sslmWmccNYlGbhsnVqdqePwTVsPJt77hauWuv43HUETLI0njdyweU2B7zWXFk5hOU3TMeo0ti+aaCFcqYi2TOtVDQyHPQJpQHxGSSkjKbDJ8ugSsDdDN5x0Pz6f8JgZd/Is3EbkqSOugfaZAfGrzSw== ansible@dcpolauto01"
+        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDNV/EmyAjEhjYqzXd77OXeBh0MvkD1cWZ0fkgpxe//PyW4IOrg0mSzTacsRxc7NXzgngyu2x8gc8G5xX4OYwvpaRlBWsuLYizzF/wqidq9oQPCd2i7zDvPTHpIb5M4rT8JK12ENkmwKgNDVbgP9CWV42mWzGGEMoJwZry+2EAkiiqE0n7AUOcaBnDHcNonCyyHhKembBYO5m/r6KSOAQOY1/fTaNe/sSCOxF9O6P4js3iO6W0faib+sY213ZdC9lpLDh/P/8wux6bDD/qRX2a805ujLuppINJsX3/1YqqeCB6J/j2+izS0Cn+VlVh+OlccAViRpv7sgqBaQsKxoKeBI8OrJeMlDgumtdEQtp7QTnOOaGk4wJR+m0F2L+gfXJ2ZnyQHJu0k5xvFX922w8pXo4TCrSlcqvL68nnuFpfzYFr9ei/YOotdWXDbDuAs9A48yCJ2mr6b0MJT6B+PplcASpl1phb7r2bXhl9er0wDGenoaOjv3iJYH9TLE8CmojM= root@dcpolautom01"
         manage_dir: True
         path: "/home/ansible/.ssh/authorized_keys"
         state: present
